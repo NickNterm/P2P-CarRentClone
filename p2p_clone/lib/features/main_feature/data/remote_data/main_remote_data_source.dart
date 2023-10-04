@@ -40,9 +40,11 @@ class MainRemoteDataSourceImpl extends MainRemoteDataSource {
     if (response.statusCode == 200) {
       final data = jsonDecode(response.body);
       List<CarModel> cars = [];
-      for (var item in data) {
-        cars.add(CarModel.fromJson(jsonDecode(item)));
-      }
+      try {
+        for (var item in data) {
+          cars.add(CarModel.fromJson(item));
+        }
+      } catch (_) {}
       return Future.value(cars);
     } else {
       throw Exception();

@@ -22,12 +22,16 @@ void main() {
     CarModel.testDefault(),
     CarModel.testDefault(),
   ];
+  List<String> carListInput = [
+    CarModel.testDefault().toJson(),
+    CarModel.testDefault().toJson(),
+  ];
 
   group("get cars", () {
     test('Should return the carList in the get cars', () async {
       // arrange
-      when(() => mockHttpClient.get(Uri.parse(carsUrl)))
-          .thenAnswer((_) async => http.Response(jsonEncode(carList), 200));
+      when(() => mockHttpClient.get(Uri.parse(carsUrl))).thenAnswer(
+          (_) async => http.Response(jsonEncode(carListInput), 200));
       // act
       final result = await mainRemoteDataSourceImpl.getCars();
       // assert

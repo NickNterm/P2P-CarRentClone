@@ -10,7 +10,7 @@ import '../features/main_feature/domain/use_case/add_car_use_case.dart';
 
 Future<void> initCars() async {
   // Bloc
-  sl.registerLazySingleton(
+  sl.registerLazySingleton<CarsBloc>(
     () => CarsBloc(
       getCarsUseCase: sl(),
       addCarUseCase: sl(),
