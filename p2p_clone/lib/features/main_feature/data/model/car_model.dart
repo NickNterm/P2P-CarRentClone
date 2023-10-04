@@ -23,18 +23,34 @@ class CarModel extends Car {
 
   factory CarModel.fromJson(Map<String, dynamic> json) {
     try {
+      var price = json['price'];
+      if (price is String) {
+        price = double.parse(price);
+      } else if (price is int) {
+        price = price.toDouble();
+      }
       return CarModel(
         id: int.parse(json['id']),
         make: json['make'],
         model: json['model'],
-        price: (json['price'] as int).toDouble(),
+        price: price,
         location: json['location'],
         availability: json['availability'],
       );
     } catch (e) {
-      print(e);
       throw Exception('Error parsing json');
     }
+  }
+
+  factory CarModel.fromEntity(Car car) {
+    return CarModel(
+      id: car.id,
+      make: car.make,
+      model: car.model,
+      price: car.price,
+      location: car.location,
+      availability: car.availability,
+    );
   }
 
   String toJson() {
