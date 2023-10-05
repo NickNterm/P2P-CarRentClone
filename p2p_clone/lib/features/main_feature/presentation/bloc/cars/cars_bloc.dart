@@ -23,12 +23,12 @@ class CarsBloc extends Bloc<CarsEvent, CarsState> {
           (cars) => emit(CarsLoaded(cars: cars)),
         );
       } else if (event is AddCar) {
-        emit(CarsLoading());
         var carList = (state as CarsLoaded).cars;
+        emit(CarsLoading());
         final result = await addCarUseCase(CarModel.fromEntity(event.car));
         result.fold(
           (failure) => emit(CarsError(message: failure.message)),
-          (success) => emit(CarsLoaded(cars: [...carList, event.car])),
+          (success) => emit(CarsLoaded(cars: [event.car, ...carList])),
         );
       }
     });

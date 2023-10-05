@@ -8,6 +8,7 @@ import 'package:p2p_clone/features/main_feature/presentation/bloc/cars/cars_bloc
 
 import '../features/main_feature/domain/use_case/add_car_use_case.dart';
 
+// Init everything for the cars
 Future<void> initCars() async {
   // Bloc
   sl.registerLazySingleton<CarsBloc>(

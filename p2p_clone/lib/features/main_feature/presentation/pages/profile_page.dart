@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:p2p_clone/dependency_injection/main_injection.dart';
@@ -63,12 +61,20 @@ class _ProfilePageState extends State<ProfilePage> {
                   const SizedBox(height: 16),
                   GestureDetector(
                     onTap: () {
-                      sl<AuthBloc>().add(
-                        LoginEvent(
-                          username: usernameController.text,
-                          password: passwordController.text,
-                        ),
-                      );
+                      if (usernameController.text.isNotEmpty) {
+                        sl<AuthBloc>().add(
+                          LoginEvent(
+                            username: usernameController.text,
+                            password: passwordController.text,
+                          ),
+                        );
+                      } else {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text("Please enter username"),
+                          ),
+                        );
+                      }
                     },
                     child: Container(
                       width: double.infinity,
@@ -93,10 +99,34 @@ class _ProfilePageState extends State<ProfilePage> {
             );
           } else if (state is AuthSuccess) {
             return Center(
-              child: Text(state.user.name),
+              child: Padding(
+                padding: const EdgeInsets.all(20),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Text(
+                      "Welcome, now you are logged in!",
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    Text(
+                      "Hello ${state.user.name}!",
+                      style: const TextStyle(
+                        fontSize: 18,
+                      ),
+                    ),
+                    const SizedBox(height: 20),
+                    const Text(
+                      "Now if you close and open the app again, you will have to authenticate again with your fingerprint and not your data if the device supports it.",
+                      textAlign: TextAlign.center,
+                    ),
+                  ],
+                ),
+              ),
             );
           }
-          print(state);
           return const SizedBox();
         },
       ),

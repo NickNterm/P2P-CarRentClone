@@ -20,9 +20,10 @@ class AuthRepositoryImpl extends AuthRepository {
   @override
   Future<Either<Failure, UserModel>> fingerPrintUnlock() async {
     if (await authLocalDataSource.getToken() != '') {
-      print("AuthRepositoryImpl: fingerPrintUnlock");
+      // if the user had logged in before, try to login with fingerPrint
       try {
         final result = await authLocalDataSource.authWithFingerPrint();
+        // if the fingerPrint is correct, return the user from the token
         if (result) {
           return Right(
             UserModel.fromToken(
@@ -33,8 +34,7 @@ class AuthRepositoryImpl extends AuthRepository {
         return const Left(
           Failure("Auth Fail"),
         );
-      } catch (e) {
-        print("AuthRepositoryImpl: fingerPrintUnlock: $e");
+      } catch (_) {
         return const Left(
           Failure("Auth Fail"),
         );
@@ -45,23 +45,18 @@ class AuthRepositoryImpl extends AuthRepository {
   }
 
   @override
-  Future<Either<Failure, bool>> isRegistered() async {
-    if (await authLocalDataSource.getToken() != '') {
-      return const Right(true);
-    }
-    return const Right(false);
-  }
-
-  @override
   Future<Either<Failure, UserModel>> login(
     String username,
     String password,
   ) async {
     if (await networkInfo.isConnected) {
+      // if there is network connection, login with the api
       final result = await authRemoteDataSource.login(username, password);
+      // cache the token locally
       authLocalDataSource.cacheToken(result);
       return Right(UserModel.fromToken(result));
     } else {
+      // else there is no way to login
       return const Left(NetworkFailure());
     }
   }

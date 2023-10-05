@@ -19,10 +19,16 @@ class MainRemoteDataSourceImpl extends MainRemoteDataSource {
 
   @override
   Future<bool> addCar(CarModel car) async {
-    final response = await client.post(
-      Uri.parse(carsUrl),
-      body: jsonEncode(car.toJson()),
-    );
+    // TODO this is a mock api and this don't work
+
+    final response = await client
+        .post(
+          Uri.parse(carsUrl),
+          body: jsonEncode(car.toJson()),
+        )
+        .timeout(
+          const Duration(seconds: 2),
+        );
 
     if (response.statusCode == 200) {
       return Future.value(true);
@@ -33,6 +39,7 @@ class MainRemoteDataSourceImpl extends MainRemoteDataSource {
 
   @override
   Future<List<CarModel>> getCars() async {
+    // TODO this is a mock api and the data is random
     final response = await client.get(
       Uri.parse(carsUrl),
     );

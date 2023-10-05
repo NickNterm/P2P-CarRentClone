@@ -19,26 +19,27 @@ class AuthLocalDataSourceImpl extends AuthLocalDataSource {
 
   @override
   Future<bool> cacheToken(String token) async {
-    print('token: $token');
+    // cache the token to the shared preferences
     return sharedPreferences.setString('token', token);
   }
 
   @override
   Future<String> getToken() async {
-    print('token is: ${sharedPreferences.getString('token')}');
+    // return the token from the shared preferences
     return sharedPreferences.getString('token') ?? '';
   }
 
   @override
   Future<bool> authWithFingerPrint() async {
+    // authenticate with fingerPrint
+    // check if the device has fingerPrint
     if (await localAuthentication.canCheckBiometrics) {
-      print('can check biometrics');
+      // then try to login with fingerPrint
       final result = await localAuthentication.authenticate(
         localizedReason: 'Please authenticate to login',
       );
       return result;
     }
-    print('can not check biometrics');
     return false;
   }
 }

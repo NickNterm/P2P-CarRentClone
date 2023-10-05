@@ -22,9 +22,9 @@ void main() {
     CarModel.testDefault(),
     CarModel.testDefault(),
   ];
-  List<String> carListInput = [
-    CarModel.testDefault().toJson(),
-    CarModel.testDefault().toJson(),
+  List carListInput = [
+    jsonDecode(CarModel.testDefault().toJson()),
+    jsonDecode(CarModel.testDefault().toJson()),
   ];
 
   group("get cars", () {

@@ -19,9 +19,9 @@ class MainRepositoryImpl extends MainRepository {
 
   @override
   Future<Either<Failure, bool>> addCar(CarModel car) async {
-    // logic is shown in tests
     if (await networkInfo.isConnected) {
       try {
+        // if there is connect add the car to the api
         final flag = await remoteDataSource.addCar(car);
         // again adding to cache is not that important
         try {
@@ -32,18 +32,20 @@ class MainRepositoryImpl extends MainRepository {
         return const Left(ServerFailure());
       }
     } else {
+      // if there is no connection, return a network failure
       return const Left(NetworkFailure());
     }
   }
 
   @override
   Future<Either<Failure, List<CarModel>>> getCars() async {
-    // logic is shown in tests
     if (await networkInfo.isConnected) {
+      // if it is connected to network get the cars from the api
       try {
         final remoteCars = await remoteDataSource.getCars();
         // if there is an error in caching, we don't care too much
         try {
+          // cache the data locally
           localDataSource.cacheCars(remoteCars);
         } catch (_) {}
         return Right(remoteCars);
@@ -51,10 +53,11 @@ class MainRepositoryImpl extends MainRepository {
         return const Left(ServerFailure());
       }
     } else {
+      // if there is no network connection, get the cars from the local storage
       try {
         final localCars = await localDataSource.getCars();
         return Right(localCars);
-      } catch (e) {
+      } catch (_) {
         return const Left(CacheFailure());
       }
     }

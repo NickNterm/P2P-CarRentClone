@@ -12,35 +12,29 @@ class LoadingPage extends StatefulWidget {
 }
 
 class _LoadingPageState extends State<LoadingPage> {
-  double carTranslateX = -100;
+  double carTranslateX = -300;
   double circleScale = 8;
-  double textOpacity = 0;
   late StreamSubscription carListener;
   @override
   void initState() {
+    // This is a bad but simple way to do an animation and then fetch the data
     super.initState();
     carListener = sl<CarsBloc>().stream.listen((state) {
       if (state is CarsLoaded) {
         Navigator.pushReplacementNamed(context, '/home');
       }
     });
-    WidgetsBinding.instance.addPostFrameCallback((_) {
+    WidgetsBinding.instance.addPostFrameCallback((callback) {
       setState(() {
-        carTranslateX = MediaQuery.of(context).size.width / 2 - 50;
+        carTranslateX = -50;
       });
       Future.delayed(const Duration(seconds: 1), () {
         setState(() {
           circleScale = 1;
         });
       });
-      Future.delayed(const Duration(seconds: 2), () {
-        setState(() {
-          textOpacity = 1;
-        });
-        Future.delayed(const Duration(seconds: 1), () {
-          //  Navigator.pushReplacementNamed(context, '/home');
-          sl<CarsBloc>().add(GetCars());
-        });
+      Future.delayed(const Duration(seconds: 1), () {
+        sl<CarsBloc>().add(GetCars());
       });
     });
   }
@@ -71,12 +65,12 @@ class _LoadingPageState extends State<LoadingPage> {
               ),
             ),
           ),
-          AnimatedPositioned(
+          AnimatedPositionedDirectional(
             duration: const Duration(milliseconds: 500),
             curve: Curves.easeOutSine,
             top: 0,
             bottom: 0,
-            left: carTranslateX,
+            start: carTranslateX + (MediaQuery.of(context).size.width / 2),
             child: Image.asset(
               'assets/icons/Vectorcar.png',
               height: 100,
@@ -87,18 +81,13 @@ class _LoadingPageState extends State<LoadingPage> {
             bottom: 60,
             left: 0,
             right: 0,
-            child: AnimatedOpacity(
-              duration: const Duration(milliseconds: 500),
-              curve: Curves.easeOutSine,
-              opacity: textOpacity,
-              child: Text(
-                "P2P Car Rental Clone",
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 26,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.blue.shade600,
-                ),
+            child: Text(
+              "P2P Car Rental Clone",
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 26,
+                fontWeight: FontWeight.bold,
+                color: Colors.blue.shade600,
               ),
             ),
           )

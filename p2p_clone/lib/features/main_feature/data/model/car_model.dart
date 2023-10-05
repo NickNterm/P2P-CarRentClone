@@ -10,6 +10,7 @@ class CarModel extends Car {
     required super.availability,
   });
 
+  // class for testing
   factory CarModel.testDefault() {
     return const CarModel(
       id: 1,
@@ -21,6 +22,7 @@ class CarModel extends Car {
     );
   }
 
+  // Json to Model
   factory CarModel.fromJson(Map<String, dynamic> json) {
     try {
       var price = json['price'];
@@ -37,11 +39,12 @@ class CarModel extends Car {
         location: json['location'],
         availability: json['availability'],
       );
-    } catch (e) {
+    } catch (_) {
       throw Exception('Error parsing json');
     }
   }
 
+  // Model to Entity
   factory CarModel.fromEntity(Car car) {
     return CarModel(
       id: car.id,

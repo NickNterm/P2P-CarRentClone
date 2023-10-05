@@ -7,6 +7,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'main_injection.dart';
 
 Future<void> initCore() async {
+  // init the dependencies for the core module
   final sharedPreferences = await SharedPreferences.getInstance();
   sl.registerLazySingleton<http.Client>(() => http.Client());
   sl.registerLazySingleton<SharedPreferences>(() => sharedPreferences);

@@ -108,6 +108,10 @@ class _AddCarPageState extends State<AddCarPage> {
                 );
                 // TODO add a listener to the bloc to show a snackbar if there is an error
                 // if there is no error show the data in the detail screen
+                makeController.clear();
+                modelController.clear();
+                priceController.clear();
+                locationController.clear();
                 Navigator.push(
                   context,
                   MaterialPageRoute(

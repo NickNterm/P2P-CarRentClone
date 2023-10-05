@@ -6,8 +6,8 @@ import 'package:p2p_clone/features/main_feature/domain/repository/auth_repositor
 import 'package:p2p_clone/features/main_feature/domain/use_case/auth_with_creds_use_case.dart';
 import 'package:p2p_clone/features/main_feature/domain/use_case/auth_with_fingerprint_use_case.dart';
 import 'package:p2p_clone/features/main_feature/presentation/bloc/auth/auth_bloc.dart';
-import 'package:p2p_clone/features/main_feature/presentation/bloc/cars/cars_bloc.dart';
 
+// Init everything for the auth
 Future<void> initAuth() async {
   // Bloc
   sl.registerLazySingleton<AuthBloc>(

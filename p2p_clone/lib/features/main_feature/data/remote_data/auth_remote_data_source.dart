@@ -9,8 +9,7 @@ class AuthRemoteDataSourceImpl extends AuthRemoteDataSource {
     // TODO here we need to add api call that returns a JWT token and save it localy.
     // Then the face id and fingerprint ensures that the users is there and use
     // the JWT to make the api requests
-    // For simplicity i use username as a token to test it out
-
+    // For simplicity I use username as a token to test it out
     return username;
   }
 }

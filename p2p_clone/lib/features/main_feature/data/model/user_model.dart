@@ -5,12 +5,14 @@ class UserModel extends User {
     required super.name,
   });
 
+  // Json to Model
   factory UserModel.fromJson(Map<String, dynamic> json) {
     return UserModel(
       name: json['name'],
     );
   }
 
+  // Model to Json
   String toJson() {
     return '''
     {
@@ -19,6 +21,7 @@ class UserModel extends User {
     ''';
   }
 
+  // Class for testing
   factory UserModel.testDefault() {
     return const UserModel(
       name: 'testName',

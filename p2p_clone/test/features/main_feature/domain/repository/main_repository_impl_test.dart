@@ -7,7 +7,6 @@ import 'package:p2p_clone/features/main_feature/data/local_data/main_local_data_
 import 'package:p2p_clone/features/main_feature/data/model/car_model.dart';
 import 'package:p2p_clone/features/main_feature/data/remote_data/main_remote_data_source.dart';
 import 'package:p2p_clone/features/main_feature/data/repository/main_repository_impl.dart';
-import 'package:p2p_clone/features/main_feature/domain/entities/car.dart';
 
 class MockMainLocalDataSource extends Mock implements MainLocalDataSource {}
 

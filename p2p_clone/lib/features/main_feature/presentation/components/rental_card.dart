@@ -93,6 +93,20 @@ class RentalCard extends StatelessWidget {
                       Text('${car.price}\$'),
                     ],
                   ),
+                  Row(
+                    children: [
+                      Container(
+                        width: 10,
+                        height: 10,
+                        decoration: BoxDecoration(
+                          color: car.availability ? Colors.green : Colors.red,
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                      ),
+                      const SizedBox(width: 5),
+                      const Text('Available'),
+                    ],
+                  ),
                 ],
               ),
             ),
