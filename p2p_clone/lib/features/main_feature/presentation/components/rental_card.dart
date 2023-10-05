@@ -42,11 +42,17 @@ class RentalCard extends StatelessWidget {
               ),
               child: Hero(
                 tag: car.id,
-                child: Image.asset(
-                  'assets/image/carImage.jpeg',
-                  width: 100,
-                  height: 100,
-                  fit: BoxFit.cover,
+                child: ClipRRect(
+                  borderRadius: const BorderRadius.only(
+                    topLeft: Radius.circular(20),
+                    bottomLeft: Radius.circular(20),
+                  ),
+                  child: Image.asset(
+                    'assets/image/carImage.jpeg',
+                    width: 100,
+                    height: 100,
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ),
             ),

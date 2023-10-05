@@ -19,7 +19,6 @@ class _LoadingPageState extends State<LoadingPage> {
   @override
   void initState() {
     super.initState();
-    sl<CarsBloc>().add(GetCars());
     carListener = sl<CarsBloc>().stream.listen((state) {
       if (state is CarsLoaded) {
         Navigator.pushReplacementNamed(context, '/home');
@@ -40,6 +39,7 @@ class _LoadingPageState extends State<LoadingPage> {
         });
         Future.delayed(const Duration(seconds: 1), () {
           //  Navigator.pushReplacementNamed(context, '/home');
+          sl<CarsBloc>().add(GetCars());
         });
       });
     });

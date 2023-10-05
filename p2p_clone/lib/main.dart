@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:p2p_clone/dependency_injection/main_injection.dart';
 import 'package:p2p_clone/features/loading_feature/presentation/loading_page.dart';
+import 'package:p2p_clone/features/main_feature/presentation/bloc/auth/auth_bloc.dart';
 import 'package:p2p_clone/features/main_feature/presentation/bloc/cars/cars_bloc.dart';
 import 'package:p2p_clone/features/main_feature/presentation/pages/main_page.dart';
 
@@ -21,6 +22,9 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider<CarsBloc>(
           create: (context) => sl<CarsBloc>(),
+        ),
+        BlocProvider<AuthBloc>(
+          create: (context) => sl<AuthBloc>(),
         ),
       ],
       child: MaterialApp(

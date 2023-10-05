@@ -36,11 +36,17 @@ class CarDetailPage extends StatelessWidget {
               ),
               child: Hero(
                 tag: car.id,
-                child: Image.asset(
-                  'assets/image/carImage.jpeg',
-                  width: MediaQuery.of(context).size.width / 1.4,
-                  height: MediaQuery.of(context).size.height / 3,
-                  fit: BoxFit.cover,
+                child: ClipRRect(
+                  borderRadius: const BorderRadius.only(
+                    topLeft: Radius.circular(50),
+                    bottomLeft: Radius.circular(50),
+                  ),
+                  child: Image.asset(
+                    'assets/image/carImage.jpeg',
+                    width: MediaQuery.of(context).size.width / 1.4,
+                    height: MediaQuery.of(context).size.height / 3,
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ),
             ),

@@ -1,6 +1,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.USE_BIOMETRIC"/>
+
     <application
-        android:label="p2p_clone"
+        android:label="P2P Car Rental App Clone"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

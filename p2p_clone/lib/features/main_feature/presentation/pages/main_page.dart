@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:p2p_clone/features/main_feature/presentation/pages/add_car_page.dart';
+import 'package:p2p_clone/features/main_feature/presentation/pages/profile_page.dart';
 import 'package:p2p_clone/features/main_feature/presentation/pages/rentals_page.dart';
 
 class MainPage extends StatefulWidget {
@@ -14,10 +15,7 @@ class _MainPageState extends State<MainPage> {
   List<Widget> pages = const [
     RentalsPage(),
     AddCarPage(),
-    // TODO add a profile page to make the app work with finger print
-    Center(
-      child: Text('Profile Page'),
-    ),
+    ProfilePage(),
   ];
   @override
   Widget build(BuildContext context) {

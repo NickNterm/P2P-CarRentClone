@@ -1,5 +1,6 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:http/http.dart' as http;
+import 'package:local_auth/local_auth.dart';
 import 'package:p2p_clone/core/network/network_info.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -15,5 +16,8 @@ Future<void> initCore() async {
     () => NetworkInfoImpl(
       connectivity: sl(),
     ),
+  );
+  sl.registerLazySingleton<LocalAuthentication>(
+    () => LocalAuthentication(),
   );
 }
