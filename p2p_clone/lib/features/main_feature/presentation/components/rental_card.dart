@@ -49,7 +49,7 @@ class RentalCard extends StatelessWidget {
                   ),
                   child: Image.asset(
                     'assets/image/carImage.jpeg',
-                    width: 100,
+                    width: 120,
                     height: 100,
                     fit: BoxFit.cover,
                   ),
